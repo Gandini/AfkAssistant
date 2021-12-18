@@ -121,7 +121,7 @@
     <value>True</value>
   </metadata>
   <data name="textBox_info.Text" xml:space="preserve">
-    <value>A simple assistant to help you stay online in some games when you need to take small breaks.
+    <value>A simple assistant to help you stay online in some games when you need to take small breaks. It will simulate mouse presses once every 7 to 24 minutes.
 Please use responsibly and do not take extended breaks while using this application.
 
 Despite using a simple method of pressing both mouse buttons almost simultaneously, there is no guarantee that this application is safe under the terms of service of any game. Use it at your own risk.

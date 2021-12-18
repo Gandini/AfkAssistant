@@ -120,16 +120,16 @@ namespace Assistant
             //1 = Raises left mouse first; 0 = Raises right mouse first
             if (random.Next(2) == 1) // Random 0 or 1
             {
-                //sleep ate a esquerda levantar
+                //Sleep until raising the left mouse button
                 Thread.Sleep(random.Next(40, 1000));
                 if (inProgress == 1)
                 {
                     mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
                     AppendText("LM_U ", Color.Blue);
                 }
-                
 
-                //sleep ate a direita levantar
+
+                //Sleep until raising the right mouse button
                 Thread.Sleep(random.Next(40, 1000));
                 if (inProgress == 1)
                 {
@@ -140,7 +140,7 @@ namespace Assistant
             }
             else
             {
-                //sleep ate a direita levantar
+                //Sleep until raising the right mouse button
                 Thread.Sleep(random.Next(40, 1000));
                 if (inProgress == 1)
                 {
@@ -148,7 +148,7 @@ namespace Assistant
                     AppendText("RM_U ", Color.Red);
                 }
 
-                //sleep ate a esquerda levantar
+                //Sleep until raising the left mouse button
                 Thread.Sleep(random.Next(40, 1000));
                 if (inProgress == 1)
                 {
@@ -160,7 +160,7 @@ namespace Assistant
             
         }
 
-        //AppendText was created due to a thread conflict error but it's used basically everywhere else for the sake of coherence
+        //AppendText was created due to a thread conflict error but it's used basically everywhere else for the sake of coherence - also allows adding color to the text
         private void AppendText(string value, Color color)
         {
             if (InvokeRequired)
@@ -181,9 +181,19 @@ namespace Assistant
             System.Diagnostics.Process.Start("https://ko-fi.com/gandini");
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            inProgress = 0;
+            try
+            {
+                //Just in case. Saw a left-over process once and this is just a quick and dirty solution.
+                threadForAssistant.Abort();
+            }
+            catch (Exception)
+            {
+                //
+            }
+            
         }
     }
 }
